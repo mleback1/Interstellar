@@ -1,5 +1,5 @@
+// Ads
 document.addEventListener("DOMContentLoaded", function () {
-  // Ads
   if (localStorage.getItem("ad") === null || localStorage.getItem("ad") === "default") {
     localStorage.setItem("ad", "on")
   }
@@ -16,6 +16,47 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("The adv div has been removed.")
   }
 })
+// Dynamic & Ads
+document.addEventListener("DOMContentLoaded", function () {
+  if (localStorage.getItem("dy") === null || localStorage.getItem("dy") === undefined) {
+    localStorage.setItem("dy", "false")
+  }
+})
+// Clear Cache
+function Clear() {
+  document.cookie.split("; ").forEach(function (cookie) {
+    var cookieName = cookie.split("=")[0]
+    document.cookie = cookieName + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT"
+  })
+
+  localStorage.clear()
+  sessionStorage.clear()
+
+  if (caches && caches.keys) {
+    caches
+      .keys()
+      .then(function (cacheNames) {
+        return Promise.all(
+          cacheNames.map(function (cacheName) {
+            return caches.delete(cacheName)
+          })
+        )
+      })
+      .then(function () {
+        console.log("Cache storage cleared successfully.")
+      })
+      .catch(function (error) {
+        console.error("Failed to clear cache storage:", error)
+      })
+  }
+}
+
+if (localStorage.getItem("cache") !== "3") {
+  Clear()
+  localStorage.setItem("cache", "3")
+}
+
+
 
 // Nav
 var nav = document.querySelector(".fixed-nav-bar")
@@ -26,10 +67,10 @@ if (nav) {
       <a class="icon" href="/./"><img alt="nav" id="INImg" src="/assets/media/favicon/main.png"/></a>
     </div>
     <div class="fixed-nav-bar-right">
-      <a class="navbar-link" href="/./g"><i class="fa-solid fa-gamepad navbar-icon"></i><xn>Ga</xn><xn>mes</xn></a>
-      <a class="navbar-link" href="/./ap"><i class="fa-solid fa-phone navbar-icon"></i><xn>Ap</xn><xn>ps</xn></a>
-      <a class="navbar-link" href="/./t"><i class="fa-solid fa-laptop navbar-icon"></i><xn>Ta</xn><xn>bs</xn></a>
-      <a class="navbar-link" href="/./s"><i class="fa-solid fa-gear navbar-icon settings-icon"></i><xn>Set</xn><xn>tings</xn></a>
+      <a class="navbar-link" href="/./gm"><i class="fa-solid fa-gamepad navbar-icon"></i><an>Ga</an><an>mes</an></a>
+      <a class="navbar-link" href="/./as"><i class="fa-solid fa-phone navbar-icon"></i><an>Ap</an><an>ps</an></a>
+      <a class="navbar-link" href="/./ta"><i class="fa-solid fa-laptop navbar-icon"></i><an>Ta</an><an>bs</an></a>
+      <a class="navbar-link" href="/./st"><i class="fa-solid fa-gear navbar-icon settings-icon"></i><an>Set</an><an>tings</an></a>
     </div>`
   nav.innerHTML = html
 }
